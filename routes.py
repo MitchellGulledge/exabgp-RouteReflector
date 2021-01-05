@@ -1,8 +1,13 @@
+#!/usr/bin/env python3
+
+from __future__ import print_function
+
+from sys import stdout
+from time import sleep
+
 import requests
 import json
 import socket
-from sys import stdout
-import time
 from netaddr import *
 
 def get_summarized_office_prefixes():
@@ -101,20 +106,39 @@ def get_oracle_prefixes():
     return(summarized_list_of_oracle_prefixes)
 
 office_ip_range = get_summarized_office_prefixes()
-print("Number of Office Prefixes: " + str(len(office_ip_range)))
+#print("Number of Office Prefixes: " + str(len(office_ip_range)))
 
 aws_ip_range = get_aws_prefixes()
-print("Number of AWS Prefixes for North America: " + str(len(aws_ip_range)))
+#print("Number of AWS Prefixes for North America: " + str(len(aws_ip_range)))
 
 oracle_ip_range = get_oracle_prefixes()
-print("Number of Oracle Prefixes for North America: " + str(len(oracle_ip_range)))
+#print("Number of Oracle Prefixes for North America: " + str(len(oracle_ip_range)))
 
-print(len(office_ip_range + aws_ip_range + oracle_ip_range))
+#print(len(office_ip_range + aws_ip_range + oracle_ip_range))
 
 # creating concatanated list of all saas prefixes
 full_list_of_saas_prefixes = office_ip_range + aws_ip_range + oracle_ip_range
 
 formatted_prefixes = str(full_list_of_saas_prefixes).replace("IPNetwork('","announce route ")
-finalized_formatted_prefixes = str(formatted_prefixes).replace ("')", " next-hop 1.1.1.1" + '\n')
-cleanup_prefixes = str(finalized_formatted_prefixes).replace(",","")
-stdout.write(cleanup_prefixes[1:-1])
+finalized_formatted_prefixes = str(formatted_prefixes).replace ("')", " next-hop 172.31.0.1" + '\n')
+
+new_list = list(finalized_formatted_prefixes.split(","))
+
+
+# leaving for future reference
+#messages = [
+#    'announce route 100.10.0.0/24 next-hop self',
+#    'announce route 200.20.0.0/24 next-hop self',
+#]
+
+sleep(5)
+
+#Iterate through messages
+for message in new_list:
+    stdout.write(str(message)[1:-1] + '\n')
+    stdout.flush()
+    #sleep(1)
+
+#Loop endlessly to allow ExaBGP to continue running
+while True:
+    sleep(1)
