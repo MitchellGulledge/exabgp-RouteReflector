@@ -14,16 +14,20 @@ from netaddr import *
 from collections import ChainMap
 
 # ThousandEyes Credentials are placed below for obtaining agent to agent test info
-root_url = 'https://api.thousandeyes.com/v6'
+root_url = ''
 your_email = 'mgulledg@cisco.com'
-your_apikey = 'dkbdg9gc60hsexjs3k5bekn4vp18wtfs'
+your_apikey = ''
 
 # aid is a param for API call - target account group - required to get the right agent back if you have multiple
-your_aid = '199526' 
+your_aid = '' 
 
 # see https://developer.thousandeyes.com/v6/agents/#/agents
 # note - DESPITE documentation, API does not respect the agentType param - BOOOOO!
 your_optional_payload = {'agentType':'Enterprise', 'aid' : your_aid}
+
+# inputting BGP config for pop1 and pop2 neighbor IPs
+pop1_bgp_neighbor_ip = '172.31.10.71'
+pop2_bgp_neighbor_ip = '172.31.2.217'
 
 
 # get agent to agent test list - ThousandEyes
@@ -707,13 +711,14 @@ east_us_prefix_list = azure_ip_range[1] + gcp_ip_range[1] + aws_ip_range[1]
 print(len(east_us_prefix_list))
 print(len(west_us_prefix_list))
 
-formatted_pop1_prefixes = str(east_us_prefix_list).replace("IPNetwork('","announce route ")
+formatted_pop1_prefixes = str(east_us_prefix_list).replace("IPNetwork('","neighbor "+ \
+    str(pop1_bgp_neighbor_ip) +" announce route ")
 finalized_pop1_formatted_prefixes = str(formatted_pop1_prefixes).replace ("')", " next-hop 172.31.0.1" + '\n')
 
 
 pop1_list = list(finalized_pop1_formatted_prefixes.split(","))
 
-formatted_pop2_prefixes = str(west_us_prefix_list).replace("IPNetwork('","announce route ")
+formatted_pop2_prefixes = str(west_us_prefix_list).replace("IPNetwork('","neighbor " + str(pop2_bgp_neighbor_ip) + " announce route ")
 finalized_pop2_formatted_prefixes = str(formatted_pop2_prefixes).replace ("')", " next-hop 172.31.0.1" + '\n')
 
 
