@@ -15,7 +15,7 @@ from collections import ChainMap
 
 # ThousandEyes Credentials are placed below for obtaining agent to agent test info
 root_url = ''
-your_email = 'mgulledg@cisco.com'
+your_email = ''
 your_apikey = ''
 
 # aid is a param for API call - target account group - required to get the right agent back if you have multiple
