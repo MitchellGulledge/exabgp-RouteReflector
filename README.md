@@ -4,5 +4,5 @@ This route reflector is used to steer branch traffic from SD WAN nodes to the be
 
 Below is a Diagram that reflects high level the operational flow of the solution:
 
-![Test Image 1](EXA-Topology.png)
+![Test Image 1](EXA-TE-topology.png)
 
