@@ -28,6 +28,8 @@ your_optional_payload = {'agentType':'Enterprise', 'aid' : your_aid}
 # inputting BGP config for pop1 and pop2 neighbor IPs
 pop1_bgp_neighbor_ip = '172.31.10.71'
 pop2_bgp_neighbor_ip = '172.31.2.217'
+pop1_next_hop = ''
+pop2_next_hop = ''
 
 
 # get agent to agent test list - ThousandEyes
@@ -713,22 +715,17 @@ print(len(west_us_prefix_list))
 
 formatted_pop1_prefixes = str(east_us_prefix_list).replace("IPNetwork('","neighbor "+ \
     str(pop1_bgp_neighbor_ip) +" announce route ")
-finalized_pop1_formatted_prefixes = str(formatted_pop1_prefixes).replace ("')", " next-hop 172.31.0.1" + '\n')
+finalized_pop1_formatted_prefixes = str(formatted_pop1_prefixes).replace ("')", " next-hop " + str(pop1_next_hop) + '\n')
 
 
 pop1_list = list(finalized_pop1_formatted_prefixes.split(","))
 
 formatted_pop2_prefixes = str(west_us_prefix_list).replace("IPNetwork('","neighbor " + str(pop2_bgp_neighbor_ip) + " announce route ")
-finalized_pop2_formatted_prefixes = str(formatted_pop2_prefixes).replace ("')", " next-hop 172.31.0.1" + '\n')
+finalized_pop2_formatted_prefixes = str(formatted_pop2_prefixes).replace ("')", " next-hop " + str(pop2_next_hop) '\n')
 
 
 pop2_list = list(finalized_pop2_formatted_prefixes.split(","))
 
-# leaving for future reference
-#messages = [
-#    'announce route 100.10.0.0/24 next-hop self',
-#    'announce route 200.20.0.0/24 next-hop self',
-#]
 
 sleep(5)
 
