@@ -30,7 +30,27 @@ https://www.thousandeyes.com/resources/enterprise-agents-deployment-best-practic
 # Creating Baseline ThousandEyes Tests 
 
 For mass test creation the ThousandEyes API is utilized under the create_thousandeyes_tests.py file in the github. 
-To run the script locally:
+To run the script locally make sure you have python3 installed on your local machine and follow this article for creating your python virtual environment: 
+https://medium.com/swlh/how-to-setup-your-python-projects-1eb5108086b1
+
+Open the script with:
+```
+vim create_thousandeyes_tests.py
+```
+
+Fill in all the required variables in order to successfully execute the script:
+```
+root_url = 'https://api.thousandeyes.com/v6'
+your_email = ''
+your_apikey = '' #
+west_us_agent_name = '' # fill in ThousandEyes agent name for the West PoP
+east_us_agent_name = '' # fill in ThousandEyes agent name for East US PoP
+west_us_agent_id = ''
+east_us_agent_id = ''
+```
+
+For more information on how to authenticate to ThousandEyes and obtain your API key please reference:
+https://developer.thousandeyes.com/v6/
 
 # Deploying Cisco Meraki Headend Appliances
 
