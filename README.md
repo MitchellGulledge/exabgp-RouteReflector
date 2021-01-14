@@ -50,7 +50,49 @@ To change source/destination checking for a network interface using the console
 
 More information can be found here on ENIs: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html
 
-# Pre-Requisites
+# Installing Docker on Ubuntu Server
+
+For installing Docker on Ubuntu server please reference:
+https://docs.docker.com/engine/install/ubuntu/
+
+The server in the referenced solution below was installed using the convenience script: (run as root)
+
+```
+$ curl -fsSL https://get.docker.com -o get-docker.sh
+$ sudo sh get-docker.sh
+```
+
+# Pulling Docker EXABGP image from Docker Hub
+
+Luckily Pierky (Fellow Cisco member) made it easy for us to package the exabgp image. Below is a link to the dockerhub page:
+https://hub.docker.com/r/pierky/exabgp
+
+In order to move the image from Docker Hub to the Ubuntu Server you need to initiate a docker pull command. More information on docker pull can be found here:
+https://docs.docker.com/engine/reference/commandline/pull/
+
+```
+docker pull pierky/exabgp
+```
+# Executing the Container
+
+Put the ExaBGP startup config into exabgp/exabgp.conf...
+
+1) mkdir exabgp
+2) vim exabgp/exabgp.conf
+... then run the image in detached mode (-d) with the local exabgp directory mounted in /etc/exabgp:
+
+```
+docker run -p 179:179 --network host -it -v /home/ubuntu/exabgp:/etc/exabgp:rw pierky/exabgp
+```
+You can verify that log gets populated: cat exabgp/log.
+
+Run docker ps to get the running container's ID (cd61079342d2 in the example below), then use it to possibly attach a terminal to the running instance.
+
+Additional note: --network host has been added to the docker run command to facilitate IP connectivity from the host (kernel) interface that is the eni in the VPC. More information on the --network host option can be found here:
+https://docs.docker.com/network/host/
+
+
+# Additional Solution Pre-Requisites
 
 The NAT Gateways at each PoP have routes pointing to branch subnets with their local vMX/MX local IP as the next hop. 
 
