@@ -18,6 +18,14 @@ And these prefixes are mapped to the results of the ThousandEyes Agent to Agent 
 
 Routes advertised from the exabgp process are then propagated via EBGP to the Cisco Meraki vMXs sitting in different VPCs in different regions (US West and US East). Underlying connectivity has been configured with VPC peering between the EXABGP VPC and the vMXs in their respective regions. VPC peering is outside the scope of this solution as this architecture can apply to any cloud/colo/DC IP fabric. 
 
+# Deploying ThousandEyes Agents 
+
+
+# Creating Baseline ThousandEyes Tests for cloud performance monitoring for each PoP
+
+
+# Deploying Cisco Meraki Headend Appliances
+
 Below are screenshots showing the underlying vMXs that have been deployed to AWS in their respective regions along with their site to site VPN config and screenshots of the Meraki API to fetch and configure BGP information.
 
 Note:
@@ -27,9 +35,15 @@ https://documentation.meraki.com/MX/MX_Installation_Guides/vMX_Setup_Guide_for_A
 BGP Settings for Both vMXs:
 ![Test Image 2](vMX-BGP-Settings.png)
 
-AWS East vMX:
+BGP Settings obtained from the API: https://developer.cisco.com/meraki/api-v1/#!get-network-appliance-vpn-bgp
+```
+b'{"enabled":true,"asNumber":64512,"ibgpHoldTimer":240,"neighbors":[{"ip":"172.31.1.25","remoteAsNumber":3000,"receiveLimit":"10000","allowTransit":true,"ebgpHoldTimer":180,"ebgpMultihop":2}]}'
+```
 
-AWS West vMX:
+
+AWS East vMX uplink info:
+
+AWS West vMX uplink info:
 
 Additionally, we have deployed a ubuntu server VM to host the Docker Container. For more information on deploying Ubuntu Servers from the AWS Marketplace please reference:
 https://aws.amazon.com/marketplace/pp/Canonical-Group-Limited-Ubuntu-1804-LTS-Bionic/B07CQ33QKV
