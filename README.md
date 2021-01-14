@@ -6,6 +6,7 @@ Below is a Diagram that reflects high level the operational flow of the solution
 
 ![Test Image 1](EXA-TE-topology.png)
 
+
 In the above solution both PoPs have their own NAT Gateways out to the internet. In the below examples we utilize Cisco Meraki vMXs deployed from the AWS Marketplace along with an ubuntu VM running the Docker Container. EXABGP advertises specific SaaS prefixes obtained from the following URLs:
 
 AWS Prefixes json: https://ip-ranges.amazonaws.com/ip-ranges.json
@@ -70,8 +71,10 @@ b'{"enabled":true,"asNumber":64512,"ibgpHoldTimer":240,"neighbors":[{"ip":"172.3
 
 
 AWS East vMX uplink info:
+![Test Image 3](AWS-East-Uplink.png)
 
 AWS West vMX uplink info:
+![Test Image 4](AWS-West-Uplink.png)
 
 Additionally, we have deployed a ubuntu server VM to host the Docker Container. For more information on deploying Ubuntu Servers from the AWS Marketplace please reference:
 https://aws.amazon.com/marketplace/pp/Canonical-Group-Limited-Ubuntu-1804-LTS-Bionic/B07CQ33QKV
