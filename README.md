@@ -20,9 +20,17 @@ Routes advertised from the exabgp process are then propagated via EBGP to the Ci
 
 # Deploying ThousandEyes Agents 
 
+For this test, we ran the ThousandEyes agents in AWS. For more information on deploying your ThousandEyes agent to a Amazon VPC please reference:
+https://docs.thousandeyes.com/product-documentation/enterprise-agents/iaas-enterprise-agent-deployment-amazon-aws
 
-# Creating Baseline ThousandEyes Tests for cloud performance monitoring for each PoP
+For broader information on how to deploy enterprise agents and some best practices I recommend:
+https://www.thousandeyes.com/resources/enterprise-agents-deployment-best-practices-webinar
 
+
+# Creating Baseline ThousandEyes Tests 
+
+For mass test creation the ThousandEyes API is utilized under the create_thousandeyes_tests.py file in the github. 
+To run the script locally:
 
 # Deploying Cisco Meraki Headend Appliances
 
