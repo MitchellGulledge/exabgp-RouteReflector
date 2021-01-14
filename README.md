@@ -127,7 +127,7 @@ $ curl -fsSL https://get.docker.com -o get-docker.sh
 $ sudo sh get-docker.sh
 ```
 
-# Pulling Docker EXABGP image from Docker Hub
+# Pulling Docker exabgp image from Docker Hub
 
 Luckily Pierky (Fellow Cisco member) made it easy for us to package the exabgp image. Below is a link to the dockerhub page:
 https://hub.docker.com/r/pierky/exabgp
