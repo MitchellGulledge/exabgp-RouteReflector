@@ -138,12 +138,23 @@ https://docs.docker.com/engine/reference/commandline/pull/
 ```
 docker pull pierky/exabgp
 ```
-# Executing the Container
+# Updating exabgp Conf
 
 Put the ExaBGP startup config into exabgp/exabgp.conf...
 
 1) mkdir exabgp
 2) vim exabgp/exabgp.conf
+3) paste the contents from:
+https://github.com/MitchellGulledge/exabgp-RouteReflector/blob/main/exabgp.conf
+```
+be sure to update the neighbor IP addresses for your exabgp EBGP peers
+```
+
+4) under the /home/ubuntu/exabgp directory in the Ubunutu server, vim routes.py and paste the contents from:
+https://github.com/MitchellGulledge/exabgp-RouteReflector/blob/main/routes.py
+
+# Executing the Container
+
 ... then run the image in detached mode (-d) with the local exabgp directory mounted in /etc/exabgp:
 
 ```
