@@ -84,6 +84,15 @@ AWS East vMX uplink info:
 AWS West vMX uplink info:
 ![Test Image 4](AWS-West-Uplink.png)
 
+# Additional Solution Pre-Requisites
+
+The NAT Gateways at each PoP have routes pointing to branch subnets with their local vMX/MX local IP as the next hop. For more information on configuring the return route please reference the Cisco Meraki documentation here:
+https://documentation.meraki.com/MX/MX_Installation_Guides/vMX_Setup_Guide_for_Amazon_Web_Services_(AWS)#Additional_VPC_Configuration
+
+Default routes either generated from exabgp with the next hop as the local NAT Gateway. (This can be done on the Cisco Meraki MX/vMX in concentrator mode by adding 0.0.0.0/0 as a local subnet. In addition we can rely on exabgp to generate the default route and set the local gateway as the next hop. (This option would have to be added to the routes.py file as it does not exist today)
+
+# Deploying Ubuntu Server
+
 Additionally, we have deployed a ubuntu server VM to host the Docker Container. For more information on deploying Ubuntu Servers from the AWS Marketplace please reference:
 https://aws.amazon.com/marketplace/pp/Canonical-Group-Limited-Ubuntu-1804-LTS-Bionic/B07CQ33QKV
 
@@ -148,9 +157,3 @@ Additional note: --network host has been added to the docker run command to faci
 https://docs.docker.com/network/host/
 
 
-# Additional Solution Pre-Requisites
-
-The NAT Gateways at each PoP have routes pointing to branch subnets with their local vMX/MX local IP as the next hop. For more information on configuring the return route please reference the Cisco Meraki documentation here:
-https://documentation.meraki.com/MX/MX_Installation_Guides/vMX_Setup_Guide_for_Amazon_Web_Services_(AWS)#Additional_VPC_Configuration
-
-Default routes either generated from exabgp with the next hop as the local NAT Gateway. (This can be done on the Cisco Meraki MX/vMX in concentrator mode by adding 0.0.0.0/0 as a local subnet. In addition we can rely on exabgp to generate the default route and set the local gateway as the next hop. (This option would have to be added to the routes.py file as it does not exist today)
