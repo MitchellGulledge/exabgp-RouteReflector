@@ -1,6 +1,14 @@
-# exabgp Route Reflector
+# exabgp Route Reflector - Overview
 
 This route reflector is used to steer branch traffic from SD WAN nodes to the best performing DC where a MX/vMX is being hosted. EXABGP is used to manipulate BGP advertisements based on test data probing hosted ThousandEyes cloud agents across all regions in GCP/Azure/AWS. 
+
+# Problem Statment
+
+For branch networks (In this case Meraki SD WAN Appliances) are full tunneling (As in they have a default route for their client traffic over their SD WAN overlay). SaaS traffic is being routed to the less optimal Hub.
+
+Ex: Meraki MX Branch in Dallas TX has Hubs in NY and LAX. NY is the primary Hub via a shorter AS Path length. (no ECMP in this scenario) The MX is accessing applications in Asia and routes that traffic to NY before being routed to the Asia region instead of being routed to the LAX PoP then Asia.
+
+# Architecture
 
 Below is a Diagram that reflects high level the operational flow of the solution:
 
