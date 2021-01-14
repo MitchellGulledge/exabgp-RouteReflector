@@ -24,6 +24,9 @@ Note:
 For more information on deploying virtual MXs from the AWS marketplace please reference the following link:
 https://documentation.meraki.com/MX/MX_Installation_Guides/vMX_Setup_Guide_for_Amazon_Web_Services_(AWS)
 
+BGP Settings for Both vMXs:
+![Test Image 2](Settings.png)
+
 AWS East vMX:
 
 AWS West vMX:
